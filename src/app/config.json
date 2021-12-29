@@ -1,0 +1,4 @@
+{
+  "apiEndpoint": "https://rickandmortyapi.com/api/",
+  "pageSize": 8
+}

@@ -1,13 +1,172 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.header,
+.filter-panel-wrapper,
+.pagination-panel {
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  background: #fff;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-text {
+  font-weight: 999;
+}
+
+.content {
+  margin-top: 220px;
+}
+
+.filter-panel-wrapper {
+  z-index: 999;
+  margin-top: 60px;
+  height: 100px;
+  flex-wrap: wrap;
+}
+
+.pagination-panel {
+  z-index: 998;
+  margin-top: 160px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.character-card-wrapper {
+  max-width: 540px;
+  background-color: honeydew;
+}
+.character-card-wrapper-modal {
+  max-width: 540px;
+  background-color: honeydew;
+}
+
+.character-card-wrapper:hover {
+  background-color: rgb(171, 185, 171);
+  cursor: pointer;
+}
+
+.img-card {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.circle {
+  border-radius: 50%;
+  background-color: green;
+  width: 5px;
+  height: 5px;
+}
+
+.background-color-red {
+  background-color: brown;
+}
+.background-color-green {
+  background-color: green;
+}
+.background-color-gray {
+  background-color: gray;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+}
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0);
+  position: fixed;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  max-height: 100%;
+  pointer-events: none;
+}
+
+.modal-content {
+  position: relative;
+  max-width: 780px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  border-width: 5px;
+  border-color: rgb(95, 97, 95);
+  background-color: rgb(237, 240, 193);
+  border-radius: 15px;
+  max-height: 50%;
+}
+.episode-list {
+  max-height: 250px;
+  background-color: rgb(240, 245, 167);
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  pointer-events: auto;
+  overflow-y: auto;
+}
+
+.btn-close-modal {
+  right: 0px;
+
+  top: 0px;
+  display: block;
+  position: absolute;
+  cursor: pointer;
+  float: right;
+  width: max-content;
+}
+
+.btn-close-modal-text:hover {
+  text-decoration: underline;
+}
+
+.control-filter {
+  border-right: 1px solid rgba(41, 166, 204, 0.438);
+  padding-right: 8px;
+}
+
+.control-panel {
+  min-width: 500;
+}
+
+.btn-filter {
+  height: 40px;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.gender-wrapper {
+  width: 200px;
+}
+
+@media (max-width: 768px) {
+  .character-card-wrapper,
+  .btn-filter-wrapper {
+    flex-direction: column;
+  }
 }
