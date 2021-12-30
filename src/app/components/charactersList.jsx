@@ -9,6 +9,7 @@ const CharactersList = ({
   onClick,
   onClose,
 }) => {
+  // отображаем список персонажей и, если есть, выбранного персонажа
   return (
     <>
       {characters.length > 0 &&

@@ -1,3 +1,5 @@
+// функция для получения строки фильтрации
+
 export function getFilterQuery(filter, currentPage) {
   let result = currentPage > 1 ? "page=" + currentPage : "";
   result += result.length > 0 ? "&" : "";

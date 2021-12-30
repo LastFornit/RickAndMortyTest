@@ -1,4 +1,3 @@
 {
-  "apiEndpoint": "https://rickandmortyapi.com/api/",
-  "pageSize": 8
+  "apiEndpoint": "https://rickandmortyapi.com/api/"
 }

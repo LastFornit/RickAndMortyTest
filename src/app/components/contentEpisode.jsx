@@ -1,6 +1,7 @@
 import React from "react";
 
 const ContentEpisode = ({ episode }) => {
+  // episode может быть одной строкой или массивом строк, в зависимости от места вызова
   if (!Array.isArray(episode)) {
     if (episode) {
       return (

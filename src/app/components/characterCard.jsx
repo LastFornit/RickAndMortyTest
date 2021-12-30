@@ -3,6 +3,7 @@ import CardContent from "./cardContent";
 import CardImage from "./cardImage";
 
 const CharacterCard = ({ character, onClick }) => {
+  // карточка персонажа
   return (
     <>
       {character && (

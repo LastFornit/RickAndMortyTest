@@ -4,6 +4,8 @@ import CardContent from "./cardContent";
 import CardImage from "./cardImage";
 
 const SelectedCharacterCard = ({ character, onClose }) => {
+  // карточка выбранного персонажа.
+  //CardImage и CardContent используются теже, что и в основном списке персонажей, но немного с другими параметрами
   return (
     <>
       <div className="character-card-wrapper-modal card mb-3 rounded-3 modal">

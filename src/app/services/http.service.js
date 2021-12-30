@@ -3,6 +3,9 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import configFile from "../config.json";
 
+// сервис для получения данных
+// используется axios
+
 const errorsMsg = {
   404: "Page or filter results not found",
   default: "Somthing was wrong. Try it later",
@@ -39,6 +42,8 @@ axios.interceptors.response.use(
     const errorMsg = Object.keys(errorsMsg).find(
       (errorCode) => +errorCode === error.response.status
     );
+
+    // отображаем ошибку
     toast.error(errorsMsg ? errorsMsg[errorMsg] : errorsMsg.default);
 
     return Promise.reject(error);

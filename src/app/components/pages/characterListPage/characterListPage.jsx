@@ -4,30 +4,38 @@ import charactersService from "../../../services/characters.service";
 import { getFilterQuery } from "../../../utils/filterUtils";
 import FilterPanel from "../../filterPanel";
 import Pagination from "../../pagination";
-import configFile from "../../../config.json";
 import episodesService from "../../../services/episodes.service";
+
+// основной модуль
 
 const CharacterListPage = () => {
   const [characters, setCharacters] = useState([]);
   const [episodes, setEpisodes] = useState([]);
+
+  // selectedCharacter - выбранный персонаж, карточка которого должна отображаться модально
   const [selectedCharacter, setSelectedCharacter] = useState();
   const [currentPage, setCurrentPage] = useState(-1);
   const [filter, setFilter] = useState("");
   const [info, setInfo] = useState();
 
+  // устанавливаем начальную страницу при монтировании
   useEffect(() => {
     setCurrentPage(1);
   }, []);
+
+  // запрашиваем пользователей с сервера при изменении страницы или фильтра
   useEffect(() => {
     getCharacters();
     setSelectedCharacter();
     window.scrollTo(0, 0);
   }, [currentPage, filter]);
 
+  // получаем строку с параметрами фильтрации
   function getFilter(filter, currentPage) {
     return getFilterQuery(filter, currentPage);
   }
 
+  // получаем персонажей
   async function getCharacters() {
     const filterText = getFilter(filter, currentPage); // &name=rick
 
@@ -36,6 +44,7 @@ const CharacterListPage = () => {
 
       setInfo(info);
 
+      // меняем эписоды у персонажа на новый объект, с которым будем работать далее
       const characterArrayWithEpisode = results.map((result) => {
         return {
           ...result,
@@ -46,6 +55,7 @@ const CharacterListPage = () => {
       });
 
       setCharacters(characterArrayWithEpisode);
+
       updateEpisodes(
         getEpisodesUrls(
           characterArrayWithEpisode.map(
@@ -58,30 +68,7 @@ const CharacterListPage = () => {
     }
   }
 
-  function getEpisodeNameLocal(episodeUrl) {
-    const findedEpisode = episodes.find((episode) => {
-      return episode.url === episodeUrl ? episode.name : "";
-    });
-    return findedEpisode ? findedEpisode.name : "";
-  }
-
-  function getEpisodesUrls(episodesData) {
-    const episodesArray = [];
-
-    episodesData.forEach((items) => {
-      items.forEach((item) => {
-        const findedItem = episodesArray.find(
-          (episode) => episode.url === item.url
-        );
-        if (!findedItem) {
-          episodesArray.push(item);
-        }
-      });
-    });
-
-    return episodesArray;
-  }
-
+  // обнвляем информацию об эпизодах
   async function updateEpisodes(episodesData) {
     const episodesUrl = episodesData
       .filter((item) => !item.name)
@@ -99,6 +86,33 @@ const CharacterListPage = () => {
     });
   }
 
+  // получаем список уникальных эпизодов
+  function getEpisodesUrls(episodesData) {
+    const episodesArray = [];
+
+    episodesData.forEach((items) => {
+      items.forEach((item) => {
+        const findedItem = episodesArray.find(
+          (episode) => episode.url === item.url
+        );
+        if (!findedItem) {
+          episodesArray.push(item);
+        }
+      });
+    });
+
+    return episodesArray;
+  }
+
+  // получаем  имя эпизода из состояния , если оно там есть
+  function getEpisodeNameLocal(episodeUrl) {
+    const findedEpisode = episodes.find((episode) => {
+      return episode.url === episodeUrl ? episode.name : "";
+    });
+    return findedEpisode ? findedEpisode.name : "";
+  }
+
+  // обновляем имена эпизодов у персонажей, если эпизоды изменены
   useEffect(() => {
     if (episodes.length !== 0) {
       const newCharacters = characters.map((item) => {
@@ -120,6 +134,7 @@ const CharacterListPage = () => {
     }
   }, [episodes]);
 
+  // получаем имена эпизодов с сервера
   async function getEpisodesNamesApi(episodesUrls) {
     const result = await episodesService.getAll(
       episodesUrls.map((item) => episodesService.get(item))

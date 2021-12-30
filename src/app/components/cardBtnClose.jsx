@@ -1,6 +1,7 @@
 import React from "react";
 
 const CardBtnClose = ({ onClose }) => {
+  // кнопка закрыть на карточке выбранного персонажа
   return (
     <div
       className="btn-close-modal"

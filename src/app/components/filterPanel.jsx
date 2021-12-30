@@ -12,8 +12,10 @@ const initialData = {
 };
 
 const FilterPanel = ({ onFilterChange }) => {
+  //параметры фильтрации
   const [data, setData] = useState(initialData);
 
+  // общая процедура добавления/изменения параметров фильтрации
   const handleChange = (target) => {
     setData((prevState) => ({
       ...prevState,
@@ -21,6 +23,7 @@ const FilterPanel = ({ onFilterChange }) => {
     }));
   };
 
+  // проверяем параметры фильтра и получаем их как строку
   const getFilterParamsAsString = () => {
     let resultRequest = "";
     Object.keys(data).forEach((param) => {
